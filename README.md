@@ -85,43 +85,92 @@ python -m src.data.downloader rohitgajawada/developer-burnout
    - Download your desired datasets
    - Extract to `data/raw/`
 
-#### Kaggle API Detailed Setup
+#### Kaggle API Complete Workflow
 
+**1. Set up Kaggle API credentials:**
 ```bash
-# 1. Download API token from https://www.kaggle.com/settings/account
-#    (Click "Create New API Token")
+# Get API token from https://www.kaggle.com/settings/account
+# Under "Legacy API Credentials" → "Create New API Token"
+# This downloads kaggle.json
 
-# 2. Place credentials
+# Place credentials in home directory
 mkdir -p ~/.kaggle
 mv ~/Downloads/kaggle.json ~/.kaggle/
 chmod 600 ~/.kaggle/kaggle.json
 
-# 3. Verify
+# Verify installation
 kaggle --version
-
-# 4. Download datasets
-python -m src.data.downloader <dataset-id>
 ```
 
-Find dataset ID from Kaggle URL:
-- URL: `https://www.kaggle.com/datasets/username/dataset-name`
-- ID: `username/dataset-name`
+**2. Find dataset ID:**
+
+From Kaggle notebook or dataset page:
+- Open the Kaggle notebook/dataset
+- Look at the URL: `https://www.kaggle.com/datasets/{username}/{dataset-name}`
+- Extract the ID: `username/dataset-name`
+
+Or search via CLI:
+```bash
+kaggle datasets list --search "your-keyword"
+```
+
+**3. Download dataset:**
+```bash
+# Using project script
+python -m src.data.downloader rohitgajawada/developer-burnout
+
+# Or using Kaggle CLI directly
+kaggle datasets download -d rohitgajawada/developer-burnout -p data/raw/
+```
+
+**4. Extract and verify:**
+```bash
+# Unzip downloaded file
+unzip -q ~/Downloads/*.zip -d data/raw/
+
+# List dataset files
+ls data/raw/
+ls -la data/raw/
+```
+
+**5. Load in notebook:**
+```python
+import pandas as pd
+
+df = pd.read_csv('data/raw/your_dataset.csv')
+df.info()
+df.head()
+```
+
+**Security Note**: Never commit `kaggle.json` - it's in `.gitignore`
 
 ## Development Workflow
 
+### Project Notebooks
+
+Notebooks are stored in `notebooks/` directory:
+- `01_developer_burnout_experiment.ipynb` - Main analysis from Kaggle
+
 ### Running Experiments
 
-1. **Exploratory Data Analysis**:
+1. **Start Jupyter**:
 ```bash
+source .venv/bin/activate
 jupyter notebook notebooks/
 ```
 
-2. **Model Training**:
+2. **Load your data in notebook**:
+```python
+import pandas as pd
+df = pd.read_csv('../data/raw/your_dataset.csv')
+```
+
+3. **Model Training**:
 ```bash
 python src/models/train.py --dataset <dataset_name> --model <model_type>
 ```
 
-3. **Evaluation**:
+4. **Evaluation**:
 ```bash
 python src/evaluation/evaluate.py --model <model_path>
 ```
