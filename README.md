@@ -64,85 +64,46 @@ pip install -e .
 
 ### Download Datasets
 
-#### Option A: Kaggle API (Automated)
-
-1. Create Kaggle API credentials:
-   - Visit https://www.kaggle.com/settings/account
-   - Click "Create New API Token" (downloads `kaggle.json`)
-   - Move to `~/.kaggle/`: `mv ~/Downloads/kaggle.json ~/.kaggle/`
-   - Set permissions: `chmod 600 ~/.kaggle/kaggle.json`
-
-2. Download dataset:
-```bash
-python -m src.data.downloader <dataset-id>
-
-# Example
-python -m src.data.downloader rohitgajawada/developer-burnout
-```
-
-#### Option B: Manual Download
-   - Visit [Kaggle Datasets](https://www.kaggle.com/datasets)
-   - Download your desired datasets
-   - Extract to `data/raw/`
-
-#### Kaggle API Complete Workflow
-
 **1. Set up Kaggle API credentials:**
 ```bash
 # Get API token from https://www.kaggle.com/settings/account
 # Under "Legacy API Credentials" → "Create New API Token"
-# This downloads kaggle.json
-
-# Place credentials in home directory
 mkdir -p ~/.kaggle
 mv ~/Downloads/kaggle.json ~/.kaggle/
 chmod 600 ~/.kaggle/kaggle.json
 
-# Verify installation
+# Verify
 kaggle --version
 ```
 
-**2. Find dataset ID:**
-
-From Kaggle notebook or dataset page:
-- Open the Kaggle notebook/dataset
-- Look at the URL: `https://www.kaggle.com/datasets/{username}/{dataset-name}`
-- Extract the ID: `username/dataset-name`
-
-Or search via CLI:
-```bash
-kaggle datasets list --search "your-keyword"
+**2. Find dataset ID from Kaggle notebook/dataset URL:**
+```
+URL: https://www.kaggle.com/datasets/{username}/{dataset-name}
+ID:  username/dataset-name
 ```
 
-**3. Download dataset:**
+Or search CLI: `kaggle datasets list --search "keyword"`
+
+**3. Download & extract dataset:**
 ```bash
-# Using project script
+# Download
 python -m src.data.downloader rohitgajawada/developer-burnout
 
-# Or using Kaggle CLI directly
-kaggle datasets download -d rohitgajawada/developer-burnout -p data/raw/
-```
-
-**4. Extract and verify:**
-```bash
-# Unzip downloaded file
+# Extract
 unzip -q ~/Downloads/*.zip -d data/raw/
 
-# List dataset files
+# Verify
 ls data/raw/
-ls -la data/raw/
 ```
 
-**5. Load in notebook:**
+**4. Load in notebook:**
 ```python
 import pandas as pd
-
-df = pd.read_csv('data/raw/your_dataset.csv')
+df = pd.read_csv('../data/raw/your_dataset.csv')
 df.info()
-df.head()
 ```
 
-**Security Note**: Never commit `kaggle.json` - it's in `.gitignore`
+⚠️ **Security**: Never commit `kaggle.json` (it's in `.gitignore`)
 
 ## Development Workflow
 
