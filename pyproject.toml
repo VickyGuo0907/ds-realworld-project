@@ -1,0 +1,8 @@
+[project]
+name = "ds-realworld-project"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "jupyter>=1.0.0",
+    "notebook>=7.0.0",
+]
