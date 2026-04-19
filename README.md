@@ -41,12 +41,13 @@ ds_realworld_project/
 ### Requirements
 - Python 3.14+
 - pip or poetry for dependency management
+- Kaggle API credentials (optional, for automated downloads)
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/VickyGuo0907/ds-realworld-project.git
 cd ds_realworld_project
 ```
 
@@ -61,10 +62,50 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -e .
 ```
 
-4. Download datasets from Kaggle:
+### Download Datasets
+
+#### Option A: Kaggle API (Automated)
+
+1. Create Kaggle API credentials:
+   - Visit https://www.kaggle.com/settings/account
+   - Click "Create New API Token" (downloads `kaggle.json`)
+   - Move to `~/.kaggle/`: `mv ~/Downloads/kaggle.json ~/.kaggle/`
+   - Set permissions: `chmod 600 ~/.kaggle/kaggle.json`
+
+2. Download dataset:
+```bash
+python -m src.data.downloader <dataset-id>
+
+# Example
+python -m src.data.downloader rohitgajawada/developer-burnout
+```
+
+#### Option B: Manual Download
    - Visit [Kaggle Datasets](https://www.kaggle.com/datasets)
-   - Download your desired datasets to `data/raw/`
-   - See individual project READMEs for specific dataset links
+   - Download your desired datasets
+   - Extract to `data/raw/`
+
+#### Kaggle API Detailed Setup
+
+```bash
+# 1. Download API token from https://www.kaggle.com/settings/account
+#    (Click "Create New API Token")
+
+# 2. Place credentials
+mkdir -p ~/.kaggle
+mv ~/Downloads/kaggle.json ~/.kaggle/
+chmod 600 ~/.kaggle/kaggle.json
+
+# 3. Verify
+kaggle --version
+
+# 4. Download datasets
+python -m src.data.downloader <dataset-id>
+```
+
+Find dataset ID from Kaggle URL:
+- URL: `https://www.kaggle.com/datasets/username/dataset-name`
+- ID: `username/dataset-name`
 
 ## Development Workflow
 
