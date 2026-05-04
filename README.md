@@ -147,7 +147,7 @@ pytest tests/ --cov=src
 
 Add your projects here as you complete them:
 
-- [ ] Project 1: [Dataset Name] - [Problem Type]
+- [ ] Project 1: [1_developer_burnout_dataset_7000] - [classification]
 - [ ] Project 2: [Dataset Name] - [Problem Type]
 
 ## Key Libraries
