@@ -1,0 +1,23 @@
+artifact_path: /Users/danielguo/Development/ai_learning_projects/ds_realworld_project/notebooks/mlruns/1/models/m-46179092eeb1401a800d58fbf231a5d9/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.14.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.11.1
+model_id: m-46179092eeb1401a800d58fbf231a5d9
+model_size_bytes: 2325
+model_uuid: m-46179092eeb1401a800d58fbf231a5d9
+prompts: null
+run_id: f34d466f6a9b4aa0b1e9e7d6daf46388
+utc_time_created: '2026-05-04 21:20:19.692876'

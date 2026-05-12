@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import os, requests
+from dotenv import load_dotenv
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+load_dotenv()
+token = os.environ.get("DISCORD_TOKEN", "MTUwMTYwNzk4MzYzMTU2NDgwMA.GZEIkR.tjhXpO2_g_X9MKYjs1qz2N6YUlAhe3Hrij9Ocw").strip()
 
+# Sanity check on the token itself
+print(f"Token length: {len(token)}")
+print(f"Token starts with: {token[:10]}...")
+print(f"Has whitespace? {token != token.strip()}")
+print(f"Has quotes? {token.startswith(chr(34)) or token.startswith(chr(39))}")
+print()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Actual REST API test
+r = requests.get(
+    "https://discord.com/api/v10/users/@me",
+    headers={"Authorization": f"Bot {token}"},
+)
+print(f"Status: {r.status_code}")
+print(f"Response: {r.text[:300]}")

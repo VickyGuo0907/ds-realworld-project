@@ -1,0 +1,48 @@
+{
+  "model_name": "Decision Tree (Tuned)",
+  "model_params": "{'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': None, 'max_leaf_nodes': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 2, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'monotonic_cst': None, 'random_state': 42, 'splitter': 'best'}",
+  "feature_names": [
+    "age",
+    "gender",
+    "daily_social_media_hours",
+    "sleep_hours",
+    "screen_time_before_sleep",
+    "academic_performance",
+    "physical_activity",
+    "social_interaction_level",
+    "stress_level",
+    "anxiety_level",
+    "addiction_level",
+    "platform_Both",
+    "platform_Instagram",
+    "platform_TikTok"
+  ],
+  "encoding": {
+    "gender": "binary (female=1, male=0)",
+    "social_interaction_level": "ordinal (low=0, medium=1, high=2)",
+    "platform_usage": "one-hot \u2192 platform_Both, platform_Instagram, platform_TikTok"
+  },
+  "numeric_features": [
+    "age",
+    "daily_social_media_hours",
+    "sleep_hours",
+    "screen_time_before_sleep",
+    "academic_performance",
+    "physical_activity",
+    "stress_level",
+    "anxiety_level",
+    "addiction_level"
+  ],
+  "target": "depression_label",
+  "classes": {
+    "0": "No Depression Risk",
+    "1": "Depression Risk"
+  },
+  "smote_applied": true,
+  "train_samples_smote": 1870,
+  "test_samples": 240,
+  "f1_score": 1.0,
+  "recall": 1.0,
+  "roc_auc": 1.0,
+  "timestamp": "20260504_1846"
+}
