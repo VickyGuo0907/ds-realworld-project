@@ -40,7 +40,7 @@ pip install -e ".[dev]"
 
 ### 2. Download Datasets
 - Developer Burnout: [Kaggle Dataset](https://www.kaggle.com/datasets/rohitgajawada/developer-burnout)
-- Place in `sources/raw/developer_burnout.csv`
+- Place in `data/raw/developer_burnout.csv`
 
 Or use the notebook with sample data for quick testing.
 
@@ -151,7 +151,7 @@ from src.data.loader import DataLoader
 from src.data.preprocessor import DataPreprocessor
 from src.data.splitter import DataSplitter
 
-loader = DataLoader('src/sources/raw/developer_burnout.csv')
+loader = DataLoader('src/data_pipeline/raw/developer_burnout.csv')
 df = loader.load()
 
 preprocessor = DataPreprocessor(df, numeric_cols=['age', 'experience'])

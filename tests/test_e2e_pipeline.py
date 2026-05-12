@@ -10,9 +10,9 @@ import numpy as np
 import tempfile
 from pathlib import Path
 
-from src.data.loader import DataLoader
-from src.data.preprocessor import DataPreprocessor
-from src.data.splitter import DataSplitter
+from src.data_pipeline.loader import DataLoader
+from src.data_pipeline.preprocessor import DataPreprocessor
+from src.data_pipeline.splitter import DataSplitter
 from src.features.engineer import FeatureEngineer
 from src.models.trainer import ModelTrainer
 from src.evaluation.metrics import EvaluationMetrics
@@ -399,9 +399,9 @@ class TestEndToEndPipeline:
         This is a smoke test to ensure all modules are available and
         can be imported without errors.
         """
-        from src.data.loader import DataLoader  # noqa: F401
-        from src.data.preprocessor import DataPreprocessor  # noqa: F401
-        from src.data.splitter import DataSplitter  # noqa: F401
+        from src.data_pipeline.loader import DataLoader  # noqa: F401
+        from src.data_pipeline.preprocessor import DataPreprocessor  # noqa: F401
+        from src.data_pipeline.splitter import DataSplitter  # noqa: F401
         from src.features.engineer import FeatureEngineer  # noqa: F401
         from src.models.trainer import ModelTrainer  # noqa: F401
         from src.models.base import BaseModel  # noqa: F401

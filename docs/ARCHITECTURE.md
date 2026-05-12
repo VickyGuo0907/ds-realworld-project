@@ -5,7 +5,7 @@
 ```
 Data (Kaggle) 
     ↓
-Data Pipeline (src/data/) 
+Data Pipeline (src/data_pipeline/) 
     ├→ Load CSV
     ├→ Preprocess & Clean
     └→ Split Train/Test
@@ -76,7 +76,7 @@ ds_realworld_project/
 
 ## Module Responsibilities
 
-### src/data/ - Data Pipeline
+### src/data_pipeline/ - Data Pipeline
 - **loader.py**: Load datasets from CSV with validation
 - **preprocessor.py**: Handle missing values, encode categories, normalize
 - **splitter.py**: Split data with stratification

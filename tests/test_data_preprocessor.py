@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from src.data.preprocessor import DataPreprocessor
+from src.data_pipeline.preprocessor import DataPreprocessor
 
 
 @pytest.fixture

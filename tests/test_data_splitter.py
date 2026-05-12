@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from src.data.splitter import DataSplitter
+from src.data_pipeline.splitter import DataSplitter
 
 
 @pytest.fixture

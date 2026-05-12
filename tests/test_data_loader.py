@@ -2,7 +2,7 @@
 
 import pytest
 import pandas as pd
-from src.data.loader import DataLoader
+from src.data_pipeline.loader import DataLoader
 
 
 @pytest.fixture

@@ -39,7 +39,7 @@ This project is designed to teach the complete ML pipeline. Choose your path:
    - Time: 20 minutes
 
 2. **Modules**: Study the code in `src/`
-   - Start with `src/data/`
+   - Start with `src/data_pipeline/`
    - Read docstrings and tests
    - Time: 45 minutes
 
@@ -62,7 +62,7 @@ This project is designed to teach the complete ML pipeline. Choose your path:
    - Learn testing patterns
    - Time: 15 minutes
 
-2. **Read Implementation**: Open `src/data/loader.py`
+2. **Read Implementation**: Open `src/data_pipeline/loader.py`
    - See how tests drive implementation
    - Understand the TDD process
    - Time: 15 minutes
