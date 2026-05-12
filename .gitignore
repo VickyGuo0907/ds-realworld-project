@@ -71,3 +71,4 @@ htmlcov/
 # MLflow artifacts
 mlruns/
 .mlflow/
+mlflow.db
