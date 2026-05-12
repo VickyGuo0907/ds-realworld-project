@@ -1,0 +1,45 @@
+# config.yaml
+mlflow:
+  tracking_uri: "file:./models/mlruns"
+  experiment_name: "ds_pipeline"
+  registry_uri: "file:./models/mlruns"
+
+data:
+  developer_burnout:
+    path: "data/raw/developer_burnout.csv"
+    target: "burnout_rate"
+    test_size: 0.2
+    random_state: 42
+  tennessee_mental_health:
+    path: "data/raw/tennessee_mental_health.csv"
+    target: "depression"
+    test_size: 0.2
+    random_state: 42
+
+models:
+  random_state: 42
+  algorithms:
+    - logistic_regression
+    - random_forest
+    - xgboost
+    - neural_network
+  hyperparameters:
+    logistic_regression:
+      max_iter: 1000
+      solver: "lbfgs"
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+    xgboost:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+    neural_network:
+      hidden_layers: [64, 32]
+      epochs: 50
+      batch_size: 32
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  model_stage: "Production"
