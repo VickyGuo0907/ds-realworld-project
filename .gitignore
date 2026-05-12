@@ -67,3 +67,7 @@ htmlcov/
 # Logs
 *.log
 .worktrees/
+
+# MLflow artifacts
+mlruns/
+.mlflow/
