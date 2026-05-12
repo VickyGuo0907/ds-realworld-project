@@ -59,7 +59,7 @@ mlflow ui --backend-store-uri file:./models/mlruns
 
 ### 5. Start API Server (Optional)
 ```bash
-python -m api.main
+python -m src.api.main
 # Visit http://localhost:8000/docs for interactive API docs
 ```
 
@@ -209,7 +209,7 @@ report = evaluator.get_classification_report()
 Serve predictions:
 ```python
 # Start server
-python -m api.main
+python -m src.api.main
 
 # Make predictions
 curl -X POST http://localhost:8000/predict \
@@ -230,7 +230,7 @@ jupyter notebook notebooks/1_developer_burnout_pipeline.ipynb
 mlflow ui --backend-store-uri file:./models/mlruns
 
 # Start API service
-python -m api.main
+python -m src.api.main
 
 # Run all tests
 pytest tests/ -v --cov=src

@@ -48,7 +48,7 @@ This project is designed to teach the complete ML pipeline. Choose your path:
    - Verify your understanding
    - Time: 30 minutes
 
-4. **API**: Study `api/main.py`
+4. **API**: Study `src/api/main.py`
    - Understand FastAPI basics
    - See how models are served
    - Time: 15 minutes

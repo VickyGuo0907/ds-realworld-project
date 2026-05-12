@@ -12,7 +12,7 @@ The FastAPI service provides REST endpoints for model prediction and information
 
 ### 1. Start the Server
 ```bash
-python -m api.main
+python -m src.api.main
 ```
 
 Expected output:
@@ -326,7 +326,7 @@ for features, prediction, probability in zip(
 ```
 Error: Connection refused at localhost:8000
 ```
-**Solution**: Start the server with `python -m api.main`
+**Solution**: Start the server with `python -m src.api.main`
 
 ### Timeout
 ```

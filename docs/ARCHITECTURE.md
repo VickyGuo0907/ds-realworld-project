@@ -25,7 +25,7 @@ MLflow Integration (src/mlflow_integration/)
 Evaluation (src/evaluation/)
     └→ Metrics & Comparison
     ↓
-FastAPI Service (api/)
+FastAPI Service (src/api/)
     └→ REST Endpoints
     ↓
 Monitoring (src/monitoring/)
@@ -54,10 +54,9 @@ ds_realworld_project/
 │   ├── monitoring/              # Monitoring
 │   │   ├── logger.py            # Prediction logging
 │   │   └── performance.py       # Drift detection
-│   └── serving/                 # API integration
-├── api/                         # FastAPI service
-│   ├── main.py                 # REST endpoints
-│   └── schemas.py              # Request/response models
+│   └── api/                     # FastAPI service
+│       ├── main.py              # REST endpoints
+│       └── schemas.py           # Request/response models
 ├── notebooks/                   # Educational notebooks
 │   └── 1_developer_burnout_pipeline.ipynb
 ├── tests/                       # Unit & integration tests
@@ -117,7 +116,7 @@ ds_realworld_project/
 4. Register model to registry
 5. Transition to production
 
-### api/ - REST Service
+### src/api/ - REST Service
 - **main.py**: FastAPI endpoints
 - **schemas.py**: Pydantic request/response models
 

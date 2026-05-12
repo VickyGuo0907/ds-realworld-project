@@ -3,7 +3,7 @@
 from fastapi import FastAPI, HTTPException
 from datetime import datetime
 import numpy as np
-from api.schemas import (
+from src.api.schemas import (
     PredictionRequest,
     PredictionResponse,
     BatchPredictionRequest,
