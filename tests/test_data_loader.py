@@ -2,7 +2,6 @@
 
 import pytest
 import pandas as pd
-from pathlib import Path
 from src.data.loader import DataLoader
 
 
@@ -10,9 +9,9 @@ from src.data.loader import DataLoader
 def test_csv_file(tmp_path):
     """Create a test CSV file."""
     data = {
-        'feature1': [1, 2, 3, 4, 5],
-        'feature2': [10, 20, 30, 40, 50],
-        'target': [0, 1, 0, 1, 0]
+        "feature1": [1, 2, 3, 4, 5],
+        "feature2": [10, 20, 30, 40, 50],
+        "target": [0, 1, 0, 1, 0],
     }
     df = pd.DataFrame(data)
     csv_path = tmp_path / "test.csv"
@@ -27,7 +26,7 @@ def test_load_csv(test_csv_file):
 
     assert isinstance(df, pd.DataFrame)
     assert len(df) == 5
-    assert list(df.columns) == ['feature1', 'feature2', 'target']
+    assert list(df.columns) == ["feature1", "feature2", "target"]
 
 
 def test_load_with_validation(test_csv_file):

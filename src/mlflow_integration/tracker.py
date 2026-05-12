@@ -8,9 +8,7 @@ class MLflowTracker:
     """Track experiments with MLflow."""
 
     def __init__(
-        self,
-        experiment_name: str,
-        tracking_uri: str = "file:./models/mlruns"
+        self, experiment_name: str, tracking_uri: str = "file:./models/mlruns"
     ) -> None:
         """
         Initialize MLflow tracker.
@@ -52,9 +50,7 @@ class MLflowTracker:
             mlflow.log_param(key, value)
 
     def log_metrics(
-        self,
-        metrics: Dict[str, float],
-        step: Optional[int] = None
+        self, metrics: Dict[str, float], step: Optional[int] = None
     ) -> None:
         """
         Log metrics.
@@ -67,10 +63,7 @@ class MLflowTracker:
             mlflow.log_metric(key, value, step=step)
 
     def log_model(
-        self,
-        model: Any,
-        artifact_path: str = "model",
-        model_format: str = "sklearn"
+        self, model: Any, artifact_path: str = "model", model_format: str = "sklearn"
     ) -> None:
         """
         Log model artifact.

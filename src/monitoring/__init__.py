@@ -3,4 +3,4 @@
 from src.monitoring.logger import PredictionLogger
 from src.monitoring.performance import PerformanceTracker
 
-__all__ = ['PredictionLogger', 'PerformanceTracker']
+__all__ = ["PredictionLogger", "PerformanceTracker"]

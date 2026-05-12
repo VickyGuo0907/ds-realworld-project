@@ -1,7 +1,6 @@
 """Kaggle dataset downloader utilities."""
 
 import subprocess
-import os
 from pathlib import Path
 
 
@@ -31,7 +30,7 @@ def download_kaggle_dataset(dataset_id: str, output_dir: str = "data/raw") -> No
 
     subprocess.run(
         ["kaggle", "datasets", "download", "-d", dataset_id, "-p", output_dir],
-        check=True
+        check=True,
     )
 
     print("Download complete!")
@@ -46,8 +45,8 @@ def download_kaggle_notebook_dataset(
         notebook_path: Kaggle notebook path (e.g., 'username/notebook-slug')
         output_dir: Directory to save downloaded files
     """
-    print(f"Note: Notebook-associated datasets need manual identification.")
-    print(f"Visit Kaggle notebook and check the 'Data' section for dataset IDs.")
+    print("Note: Notebook-associated datasets need manual identification.")
+    print("Visit Kaggle notebook and check the 'Data' section for dataset IDs.")
     print(f"Then use: download_kaggle_dataset('dataset-id', '{output_dir}')")
 
 

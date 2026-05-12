@@ -23,10 +23,7 @@ def test_start_run(tracker):
 def test_log_params(tracker):
     """Test logging parameters"""
     tracker.start_run()
-    tracker.log_params({
-        'learning_rate': 0.01,
-        'max_depth': 10
-    })
+    tracker.log_params({"learning_rate": 0.01, "max_depth": 10})
 
     assert mlflow.active_run() is not None
 
@@ -34,10 +31,7 @@ def test_log_params(tracker):
 def test_log_metrics(tracker):
     """Test logging metrics"""
     tracker.start_run()
-    tracker.log_metrics({
-        'accuracy': 0.95,
-        'f1_score': 0.93
-    })
+    tracker.log_metrics({"accuracy": 0.95, "f1_score": 0.93})
 
     assert mlflow.active_run() is not None
 

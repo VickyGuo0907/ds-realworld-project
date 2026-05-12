@@ -1,8 +1,7 @@
 """Performance tracking and drift detection."""
 
 import pandas as pd
-import numpy as np
-from typing import Dict, Optional
+from typing import Dict
 
 
 class PerformanceTracker:
@@ -13,10 +12,7 @@ class PerformanceTracker:
         self.baseline_stats = None
 
     def calculate_drift(
-        self,
-        baseline: pd.DataFrame,
-        current: pd.DataFrame,
-        threshold: float = 0.1
+        self, baseline: pd.DataFrame, current: pd.DataFrame, threshold: float = 0.1
     ) -> Dict[str, float]:
         """
         Calculate data drift between baseline and current data.
@@ -52,7 +48,4 @@ class PerformanceTracker:
         Args:
             data: Baseline data
         """
-        self.baseline_stats = {
-            'mean': data.mean(),
-            'std': data.std()
-        }
+        self.baseline_stats = {"mean": data.mean(), "std": data.std()}

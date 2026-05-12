@@ -11,16 +11,12 @@ class BaseModel:
     """Unified interface for classification models."""
 
     ALGORITHMS = {
-        'logistic_regression': LogisticRegression,
-        'random_forest': RandomForestClassifier,
-        'xgboost': xgb.XGBClassifier,
+        "logistic_regression": LogisticRegression,
+        "random_forest": RandomForestClassifier,
+        "xgboost": xgb.XGBClassifier,
     }
 
-    def __init__(
-        self,
-        algorithm: str,
-        params: Optional[Dict[str, Any]] = None
-    ) -> None:
+    def __init__(self, algorithm: str, params: Optional[Dict[str, Any]] = None) -> None:
         """
         Initialize model.
 
@@ -32,9 +28,7 @@ class BaseModel:
             ValueError: If algorithm not supported
         """
         if algorithm not in self.ALGORITHMS:
-            raise ValueError(
-                f"Algorithm must be one of {list(self.ALGORITHMS.keys())}"
-            )
+            raise ValueError(f"Algorithm must be one of {list(self.ALGORITHMS.keys())}")
 
         self.algorithm = algorithm
         self.params = params or {}

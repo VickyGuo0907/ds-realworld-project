@@ -19,11 +19,7 @@ class ModelTrainer:
         self.cv = cv
 
     def train(
-        self,
-        X: np.ndarray,
-        y: np.ndarray,
-        algorithm: str,
-        params: Dict[str, Any]
+        self, X: np.ndarray, y: np.ndarray, algorithm: str, params: Dict[str, Any]
     ) -> Tuple[BaseModel, Dict[str, float]]:
         """
         Train single model.
@@ -41,17 +37,12 @@ class ModelTrainer:
         model.fit(X, y)
 
         # Calculate cross-validation score
-        cv_scores = cross_val_score(
-            model.model,
-            X, y,
-            cv=self.cv,
-            scoring='accuracy'
-        )
+        cv_scores = cross_val_score(model.model, X, y, cv=self.cv, scoring="accuracy")
 
         metrics = {
-            'accuracy': model.model.score(X, y),
-            'cv_mean': cv_scores.mean(),
-            'cv_std': cv_scores.std(),
+            "accuracy": model.model.score(X, y),
+            "cv_mean": cv_scores.mean(),
+            "cv_std": cv_scores.std(),
         }
 
         return model, metrics
@@ -61,7 +52,7 @@ class ModelTrainer:
         X: np.ndarray,
         y: np.ndarray,
         algorithms: List[str],
-        params_dict: Dict[str, Dict[str, Any]]
+        params_dict: Dict[str, Dict[str, Any]],
     ) -> List[Dict[str, Any]]:
         """
         Train multiple models.
@@ -81,11 +72,13 @@ class ModelTrainer:
             params = params_dict.get(algo, {})
             model, metrics = self.train(X, y, algo, params)
 
-            results.append({
-                'algorithm': algo,
-                'model': model,
-                'params': params,
-                'metrics': metrics
-            })
+            results.append(
+                {
+                    "algorithm": algo,
+                    "model": model,
+                    "params": params,
+                    "metrics": metrics,
+                }
+            )
 
         return results

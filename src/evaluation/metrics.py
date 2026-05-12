@@ -10,17 +10,14 @@ from sklearn.metrics import (
     confusion_matrix,
     classification_report,
 )
-from typing import Dict, Optional
+from typing import Dict
 
 
 class EvaluationMetrics:
     """Calculate evaluation metrics for classification."""
 
     def __init__(
-        self,
-        y_true: np.ndarray,
-        y_pred_or_proba: np.ndarray,
-        is_proba: bool = False
+        self, y_true: np.ndarray, y_pred_or_proba: np.ndarray, is_proba: bool = False
     ) -> None:
         """
         Initialize evaluator.
@@ -47,17 +44,17 @@ class EvaluationMetrics:
             Dictionary of metrics
         """
         metrics = {
-            'accuracy': accuracy_score(self.y_true, self.y_pred),
-            'precision': precision_score(self.y_true, self.y_pred),
-            'recall': recall_score(self.y_true, self.y_pred),
-            'f1': f1_score(self.y_true, self.y_pred),
+            "accuracy": accuracy_score(self.y_true, self.y_pred),
+            "precision": precision_score(self.y_true, self.y_pred),
+            "recall": recall_score(self.y_true, self.y_pred),
+            "f1": f1_score(self.y_true, self.y_pred),
         }
 
         if self.y_proba is not None:
             try:
-                metrics['auc'] = roc_auc_score(self.y_true, self.y_proba)
+                metrics["auc"] = roc_auc_score(self.y_true, self.y_proba)
             except Exception:
-                metrics['auc'] = 0.0
+                metrics["auc"] = 0.0
 
         return metrics
 

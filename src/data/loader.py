@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import pandas as pd
-from typing import Optional, Tuple, Dict, Any
+from typing import Tuple, Dict, Any
 
 
 class DataLoader:
@@ -50,9 +50,9 @@ class DataLoader:
         """
         df = self.load()
         info = {
-            'shape': df.shape,
-            'columns': list(df.columns),
-            'dtypes': df.dtypes.to_dict(),
-            'null_counts': df.isnull().sum().to_dict()
+            "shape": df.shape,
+            "columns": list(df.columns),
+            "dtypes": df.dtypes.to_dict(),
+            "null_counts": df.isnull().sum().to_dict(),
         }
         return df, info

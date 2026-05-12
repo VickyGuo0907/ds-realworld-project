@@ -1,7 +1,6 @@
 """Data preprocessing utilities."""
 
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from typing import List, Optional
 
@@ -13,7 +12,7 @@ class DataPreprocessor:
         self,
         df: pd.DataFrame,
         numeric_cols: Optional[List[str]] = None,
-        categorical_cols: Optional[List[str]] = None
+        categorical_cols: Optional[List[str]] = None,
     ) -> None:
         """
         Initialize preprocessor.
@@ -29,7 +28,7 @@ class DataPreprocessor:
         self.scaler = None
         self.encoders = {}
 
-    def handle_missing_values(self, strategy: str = 'mean') -> pd.DataFrame:
+    def handle_missing_values(self, strategy: str = "mean") -> pd.DataFrame:
         """
         Handle missing values.
 
@@ -41,7 +40,7 @@ class DataPreprocessor:
         """
         df = self.df.copy()
 
-        if strategy == 'mean':
+        if strategy == "mean":
             for col in self.numeric_cols:
                 if df[col].isnull().any():
                     df[col].fillna(df[col].mean(), inplace=True)
@@ -78,7 +77,7 @@ class DataPreprocessor:
 
         return df
 
-    def fit_transform(self, strategy: str = 'mean') -> pd.DataFrame:
+    def fit_transform(self, strategy: str = "mean") -> pd.DataFrame:
         """
         Apply all preprocessing steps.
 

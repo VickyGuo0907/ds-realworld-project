@@ -2,7 +2,6 @@
 
 import pytest
 import numpy as np
-from sklearn.model_selection import cross_val_score
 from src.models.trainer import ModelTrainer
 
 
@@ -21,13 +20,11 @@ def test_train_single_model(sample_data):
     trainer = ModelTrainer()
 
     model, metrics = trainer.train(
-        X, y,
-        algorithm='logistic_regression',
-        params={'max_iter': 1000}
+        X, y, algorithm="logistic_regression", params={"max_iter": 1000}
     )
 
     assert model.is_fitted
-    assert 'accuracy' in metrics
+    assert "accuracy" in metrics
 
 
 def test_train_multiple_models(sample_data):
@@ -36,16 +33,17 @@ def test_train_multiple_models(sample_data):
     trainer = ModelTrainer()
 
     results = trainer.train_multiple(
-        X, y,
-        algorithms=['logistic_regression', 'random_forest'],
+        X,
+        y,
+        algorithms=["logistic_regression", "random_forest"],
         params_dict={
-            'logistic_regression': {'max_iter': 1000},
-            'random_forest': {'n_estimators': 10}
-        }
+            "logistic_regression": {"max_iter": 1000},
+            "random_forest": {"n_estimators": 10},
+        },
     )
 
     assert len(results) == 2
-    assert all('metrics' in r for r in results)
+    assert all("metrics" in r for r in results)
 
 
 def test_cv_folds_parameter():
@@ -60,17 +58,15 @@ def test_metrics_content(sample_data):
     trainer = ModelTrainer()
 
     model, metrics = trainer.train(
-        X, y,
-        algorithm='logistic_regression',
-        params={'max_iter': 1000}
+        X, y, algorithm="logistic_regression", params={"max_iter": 1000}
     )
 
-    assert 'accuracy' in metrics
-    assert 'cv_mean' in metrics
-    assert 'cv_std' in metrics
-    assert isinstance(metrics['accuracy'], (int, float))
-    assert isinstance(metrics['cv_mean'], (int, float))
-    assert isinstance(metrics['cv_std'], (int, float))
+    assert "accuracy" in metrics
+    assert "cv_mean" in metrics
+    assert "cv_std" in metrics
+    assert isinstance(metrics["accuracy"], (int, float))
+    assert isinstance(metrics["cv_mean"], (int, float))
+    assert isinstance(metrics["cv_std"], (int, float))
 
 
 def test_train_multiple_returns_correct_structure(sample_data):
@@ -79,18 +75,19 @@ def test_train_multiple_returns_correct_structure(sample_data):
     trainer = ModelTrainer()
 
     results = trainer.train_multiple(
-        X, y,
-        algorithms=['logistic_regression'],
-        params_dict={'logistic_regression': {'max_iter': 1000}}
+        X,
+        y,
+        algorithms=["logistic_regression"],
+        params_dict={"logistic_regression": {"max_iter": 1000}},
     )
 
     assert len(results) == 1
     result = results[0]
-    assert 'algorithm' in result
-    assert 'model' in result
-    assert 'params' in result
-    assert 'metrics' in result
-    assert result['algorithm'] == 'logistic_regression'
+    assert "algorithm" in result
+    assert "model" in result
+    assert "params" in result
+    assert "metrics" in result
+    assert result["algorithm"] == "logistic_regression"
 
 
 def test_train_with_empty_params(sample_data):
@@ -98,14 +95,10 @@ def test_train_with_empty_params(sample_data):
     X, y = sample_data
     trainer = ModelTrainer()
 
-    model, metrics = trainer.train(
-        X, y,
-        algorithm='logistic_regression',
-        params={}
-    )
+    model, metrics = trainer.train(X, y, algorithm="logistic_regression", params={})
 
     assert model.is_fitted
-    assert 'accuracy' in metrics
+    assert "accuracy" in metrics
 
 
 def test_train_multiple_with_different_algorithms(sample_data):
@@ -114,15 +107,16 @@ def test_train_multiple_with_different_algorithms(sample_data):
     trainer = ModelTrainer()
 
     results = trainer.train_multiple(
-        X, y,
-        algorithms=['logistic_regression', 'random_forest', 'xgboost'],
+        X,
+        y,
+        algorithms=["logistic_regression", "random_forest", "xgboost"],
         params_dict={
-            'logistic_regression': {'max_iter': 1000},
-            'random_forest': {'n_estimators': 10},
-            'xgboost': {'n_estimators': 10}
-        }
+            "logistic_regression": {"max_iter": 1000},
+            "random_forest": {"n_estimators": 10},
+            "xgboost": {"n_estimators": 10},
+        },
     )
 
     assert len(results) == 3
-    algos = [r['algorithm'] for r in results]
-    assert algos == ['logistic_regression', 'random_forest', 'xgboost']
+    algos = [r["algorithm"] for r in results]
+    assert algos == ["logistic_regression", "random_forest", "xgboost"]

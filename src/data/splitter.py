@@ -2,7 +2,7 @@
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from typing import Tuple, Optional
+from typing import Tuple
 
 
 class DataSplitter:
@@ -13,7 +13,7 @@ class DataSplitter:
         df: pd.DataFrame,
         target_col: str,
         test_size: float = 0.2,
-        random_state: int = 42
+        random_state: int = 42,
     ) -> None:
         """
         Initialize splitter.
@@ -29,7 +29,9 @@ class DataSplitter:
         self.test_size = test_size
         self.random_state = random_state
 
-    def train_test_split(self, stratify: bool = True) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def train_test_split(
+        self, stratify: bool = True
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
         Split into train and test sets.
 
@@ -45,7 +47,7 @@ class DataSplitter:
             self.df,
             test_size=self.test_size,
             stratify=stratify_col,
-            random_state=self.random_state
+            random_state=self.random_state,
         )
 
         return train.reset_index(drop=True), test.reset_index(drop=True)
@@ -55,7 +57,7 @@ class DataSplitter:
         train_size: float = 0.6,
         val_size: float = 0.2,
         test_size: float = 0.2,
-        stratify: bool = True
+        stratify: bool = True,
     ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """
         Split into train, validation, and test sets.
@@ -79,7 +81,7 @@ class DataSplitter:
             self.df,
             train_size=train_size,
             stratify=stratify_col,
-            random_state=self.random_state
+            random_state=self.random_state,
         )
 
         # Second split: split temp into val and test
@@ -90,11 +92,11 @@ class DataSplitter:
             temp,
             train_size=val_test_ratio,
             stratify=stratify_col_temp,
-            random_state=self.random_state
+            random_state=self.random_state,
         )
 
         return (
             train.reset_index(drop=True),
             val.reset_index(drop=True),
-            test.reset_index(drop=True)
+            test.reset_index(drop=True),
         )

@@ -9,7 +9,7 @@ from typing import Optional, List
 class PredictionLogger:
     """Log predictions for monitoring."""
 
-    def __init__(self, log_file: str = 'predictions.log') -> None:
+    def __init__(self, log_file: str = "predictions.log") -> None:
         """
         Initialize logger.
 
@@ -21,15 +21,13 @@ class PredictionLogger:
 
     def _setup_logger(self) -> logging.Logger:
         """Setup logger."""
-        logger = logging.getLogger('predictions')
+        logger = logging.getLogger("predictions")
 
         # Clear existing handlers
         logger.handlers = []
 
         handler = logging.FileHandler(self.log_file)
-        formatter = logging.Formatter(
-            '%(asctime)s - %(message)s'
-        )
+        formatter = logging.Formatter("%(asctime)s - %(message)s")
         handler.setFormatter(formatter)
         logger.addHandler(handler)
         logger.setLevel(logging.INFO)
@@ -40,7 +38,7 @@ class PredictionLogger:
         features: List[float],
         prediction: int,
         probability: float,
-        true_label: Optional[int] = None
+        true_label: Optional[int] = None,
     ) -> None:
         """
         Log a prediction.
@@ -52,11 +50,11 @@ class PredictionLogger:
             true_label: True label if available
         """
         log_entry = {
-            'timestamp': datetime.now().isoformat(),
-            'features': features,
-            'prediction': prediction,
-            'probability': probability,
-            'true_label': true_label
+            "timestamp": datetime.now().isoformat(),
+            "features": features,
+            "prediction": prediction,
+            "probability": probability,
+            "true_label": true_label,
         }
 
         self.logger.info(json.dumps(log_entry))

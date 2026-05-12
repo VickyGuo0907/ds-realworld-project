@@ -2,7 +2,6 @@
 
 import pytest
 import numpy as np
-from sklearn.metrics import accuracy_score, f1_score
 from src.evaluation.metrics import EvaluationMetrics
 
 
@@ -11,16 +10,18 @@ def predictions():
     """Create sample predictions."""
     y_true = np.array([0, 1, 1, 0, 1, 0, 1, 0])
     y_pred = np.array([0, 1, 1, 0, 0, 0, 1, 1])
-    y_proba = np.array([
-        [0.9, 0.1],
-        [0.2, 0.8],
-        [0.3, 0.7],
-        [0.8, 0.2],
-        [0.6, 0.4],
-        [0.9, 0.1],
-        [0.1, 0.9],
-        [0.7, 0.3]
-    ])
+    y_proba = np.array(
+        [
+            [0.9, 0.1],
+            [0.2, 0.8],
+            [0.3, 0.7],
+            [0.8, 0.2],
+            [0.6, 0.4],
+            [0.9, 0.1],
+            [0.1, 0.9],
+            [0.7, 0.3],
+        ]
+    )
     return y_true, y_pred, y_proba
 
 
@@ -30,10 +31,10 @@ def test_calculate_metrics(predictions):
     evaluator = EvaluationMetrics(y_true, y_pred)
     metrics = evaluator.calculate_metrics()
 
-    assert 'accuracy' in metrics
-    assert 'precision' in metrics
-    assert 'recall' in metrics
-    assert 'f1' in metrics
+    assert "accuracy" in metrics
+    assert "precision" in metrics
+    assert "recall" in metrics
+    assert "f1" in metrics
 
 
 def test_calculate_auc(predictions):

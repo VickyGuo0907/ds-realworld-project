@@ -12,10 +12,7 @@ class MLflowRegistry:
         self.client = mlflow.MlflowClient()
 
     def register_model(
-        self,
-        model_uri: str,
-        model_name: str,
-        tags: Optional[dict] = None
+        self, model_uri: str, model_name: str, tags: Optional[dict] = None
     ) -> None:
         """
         Register a model.
@@ -35,19 +32,9 @@ class MLflowRegistry:
         # Add tags if provided
         if tags:
             for key, value in tags.items():
-                self.client.set_model_version_tag(
-                    model_name,
-                    mv.version,
-                    key,
-                    value
-                )
+                self.client.set_model_version_tag(model_name, mv.version, key, value)
 
-    def transition_stage(
-        self,
-        model_name: str,
-        version: int,
-        stage: str
-    ) -> None:
+    def transition_stage(self, model_name: str, version: int, stage: str) -> None:
         """
         Transition model to new stage.
 
@@ -63,16 +50,10 @@ class MLflowRegistry:
         if stage not in valid_stages:
             raise ValueError(f"Stage must be one of {valid_stages}")
 
-        self.client.transition_model_version_stage(
-            model_name,
-            version,
-            stage
-        )
+        self.client.transition_model_version_stage(model_name, version, stage)
 
     def get_latest_version(
-        self,
-        model_name: str,
-        stage: str = "Production"
+        self, model_name: str, stage: str = "Production"
     ) -> Optional[dict]:
         """
         Get latest model version for stage.
@@ -84,16 +65,14 @@ class MLflowRegistry:
         Returns:
             Model version details or None
         """
-        versions = self.client.search_model_versions(
-            f"name='{model_name}'"
-        )
+        versions = self.client.search_model_versions(f"name='{model_name}'")
 
         for version in versions:
             if version.current_stage == stage:
                 return {
-                    'version': version.version,
-                    'stage': version.current_stage,
-                    'model_uri': version.source
+                    "version": version.version,
+                    "stage": version.current_stage,
+                    "model_uri": version.source,
                 }
 
         return None
