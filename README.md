@@ -1,229 +1,388 @@
-# Data Science Real-World Project
+# Data Science Real-World Project with MLflow
 
-A personal learning project for data science experiments and prediction model development using real-world datasets from Kaggle.
+A comprehensive, production-ready ML pipeline demonstrating the complete machine learning lifecycle with experiment tracking, model versioning, REST API serving, and educational documentation using real Kaggle datasets.
 
-## Overview
+**Key Features**:
+- ✅ End-to-end ML pipeline (data → model → serving)
+- ✅ Experiment tracking with MLflow (local and reproducible)
+- ✅ Model versioning and registry management
+- ✅ FastAPI REST service for predictions
+- ✅ Comprehensive test suite (80%+ coverage)
+- ✅ Production-grade code standards
+- ✅ Educational notebooks with detailed explanations
+- ✅ Multiple learning paths for different skill levels
+- ✅ Two real datasets (Developer Burnout, Tennessee Mental Health)
 
-This repository contains a collection of data science projects focused on:
-- Exploratory data analysis (EDA) on real-world datasets
-- Building and evaluating prediction models
-- Implementing machine learning solutions for various problem types
-- Learning practical data science workflows and best practices
+## Quick Start (5 minutes)
 
-**Purpose**: Personal practice and learning in:
-- Data preprocessing and feature engineering
-- Model selection and hyperparameter tuning
-- Model evaluation and validation
-- Production-ready code practices in ML
+### 1. Setup Environment
+```bash
+git clone https://github.com/VickyGuo0907/ds-realworld-project.git
+cd ds_realworld_project
+pip install -e ".[dev]"
+```
+
+### 2. Download Datasets
+- Developer Burnout: [Kaggle Dataset](https://www.kaggle.com/datasets/rohitgajawada/developer-burnout)
+- Place in `data/raw/developer_burnout.csv`
+
+Or use the notebook with sample data for quick testing.
+
+### 3. Run the Pipeline Notebook
+```bash
+jupyter notebook notebooks/1_developer_burnout_pipeline.ipynb
+```
+
+Opens a complete example of the entire ML pipeline.
+
+### 4. View Experiments (Optional)
+```bash
+mlflow ui --backend-store-uri file:./models/mlruns
+# Visit http://localhost:5000
+```
+
+### 5. Start API Server (Optional)
+```bash
+python -m api.main
+# Visit http://localhost:8000/docs for interactive API docs
+```
+
+## Learning Paths
+
+Choose your starting point based on your experience level:
+
+### 🎯 Beginner: Notebook First (1.5-2 hours)
+Start with the interactive notebook, then explore code:
+1. [Developer Burnout Pipeline Notebook](notebooks/1_developer_burnout_pipeline.ipynb)
+2. [MLflow Basics Guide](docs/guides/01_mlflow_basics.md)
+3. Explore `src/` modules
+4. Read [Architecture Overview](docs/ARCHITECTURE.md)
+
+→ [Full Learning Path](docs/learning_path.md)
+
+### 👨‍💻 Intermediate: Code First (2-3 hours)
+Understand the architecture, then see it in action:
+1. [Architecture Overview](docs/ARCHITECTURE.md)
+2. Study modules in `src/`
+3. Run the notebook
+4. [Experiment Tracking Guide](docs/guides/02_experiment_tracking.md)
+
+→ [Full Learning Path](docs/learning_path.md)
+
+### 🧪 Advanced: Test Driven (2-3 hours)
+Learn from tests and implementation:
+1. Read `tests/test_*.py` files
+2. Study corresponding `src/` modules
+3. Run tests: `pytest tests/ -v --cov=src`
+4. Execute notebook to see integration
+
+→ [Full Learning Path](docs/learning_path.md)
 
 ## Project Structure
 
 ```
 ds_realworld_project/
-├── README.md
-├── pyproject.toml
-├── main.py
+├── src/                          # Production ML library
+│   ├── data/                    # Data loading & preprocessing
+│   │   ├── loader.py            # CSV loading with validation
+│   │   ├── preprocessor.py      # Data cleaning & normalization
+│   │   └── splitter.py          # Train/test/val splitting
+│   ├── features/                # Feature engineering
+│   │   └── engineer.py          # Feature creation & transformation
+│   ├── models/                  # Model training
+│   │   ├── base.py              # Unified algorithm interface
+│   │   └── trainer.py           # Training orchestration
+│   ├── evaluation/              # Model evaluation
+│   │   └── metrics.py           # Classification metrics
+│   ├── mlflow_integration/      # MLflow tracking & registry
+│   │   ├── tracker.py           # Experiment tracking
+│   │   └── registry.py          # Model versioning
+│   ├── monitoring/              # Production monitoring
+│   │   ├── logger.py            # Prediction logging
+│   │   └── performance.py       # Drift detection
+│   └── serving/                 # Model serving utilities
+├── api/                         # FastAPI REST service
+│   ├── main.py                 # API endpoints
+│   └── schemas.py              # Request/response models
+├── notebooks/                   # Educational Jupyter notebooks
+│   ├── 1_developer_burnout_pipeline.ipynb
+│   └── (2_tennessee_mental_health_* coming soon)
+├── tests/                       # Unit & integration tests
+├── docs/                        # Documentation & guides
+│   ├── guides/                 # Learning guides
+│   │   ├── 01_mlflow_basics.md
+│   │   └── 02_experiment_tracking.md
+│   ├── ARCHITECTURE.md         # System architecture
+│   └── learning_path.md        # Learning path guide
 ├── data/
-│   ├── raw/              # Original Kaggle datasets
-│   └── processed/        # Cleaned and processed data
-├── notebooks/            # Jupyter notebooks for EDA and experimentation
-├── src/
-│   ├── data/            # Data loading and preprocessing modules
-│   ├── features/        # Feature engineering utilities
-│   ├── models/          # Model definitions and training logic
-│   └── evaluation/      # Model evaluation and metrics
-├── tests/               # Unit and integration tests
-└── models/              # Trained model artifacts
+│   ├── raw/                    # Original Kaggle datasets
+│   └── processed/              # Preprocessed data
+├── models/mlruns/              # MLflow tracking data
+├── config.yaml                 # Configuration settings
+├── pyproject.toml              # Dependencies & metadata
+└── README.md                   # This file
 ```
 
-## Getting Started
+## Core Components
 
-### Requirements
-- Python 3.14+
-- pip or poetry for dependency management
-- Kaggle API credentials (optional, for automated downloads)
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/VickyGuo0907/ds-realworld-project.git
-cd ds_realworld_project
-```
-
-2. Create virtual environment:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -e .
-```
-
-### Download Datasets
-
-**1. Set up Kaggle API credentials:**
-```bash
-# Get API token from https://www.kaggle.com/settings/account
-# Under "Legacy API Credentials" → "Create New API Token"
-mkdir -p ~/.kaggle
-mv ~/Downloads/kaggle.json ~/.kaggle/
-chmod 600 ~/.kaggle/kaggle.json
-
-# Verify
-kaggle --version
-```
-
-**2. Find dataset ID from Kaggle notebook/dataset URL:**
-```
-URL: https://www.kaggle.com/datasets/{username}/{dataset-name}
-ID:  username/dataset-name
-```
-
-Or search CLI: `kaggle datasets list --search "keyword"`
-
-**3. Download & extract dataset:**
-```bash
-# Download
-python -m src.data.downloader rohitgajawada/developer-burnout
-
-# Extract
-unzip -q ~/Downloads/*.zip -d data/raw/
-
-# Verify
-ls data/raw/
-```
-
-**4. Load in notebook:**
+### Data Pipeline
+Load, preprocess, and split data:
 ```python
-import pandas as pd
-df = pd.read_csv('../data/raw/your_dataset.csv')
-df.info()
+from src.data.loader import DataLoader
+from src.data.preprocessor import DataPreprocessor
+from src.data.splitter import DataSplitter
+
+loader = DataLoader('data/raw/developer_burnout.csv')
+df = loader.load()
+
+preprocessor = DataPreprocessor(df, numeric_cols=['age', 'experience'])
+df_clean = preprocessor.fit_transform()
+
+splitter = DataSplitter(df_clean, target_col='burnout_rate')
+train, test = splitter.train_test_split(stratify=True)
 ```
 
-⚠️ **Security**: Never commit `kaggle.json` (it's in `.gitignore`)
-
-## Development Workflow
-
-### Project Notebooks
-
-Notebooks are stored in `notebooks/` directory:
-- `01_developer_burnout_experiment.ipynb` - Main analysis from Kaggle
-
-### Running Experiments
-
-1. **Start Jupyter**:
-```bash
-source .venv/bin/activate
-jupyter notebook notebooks/
-```
-
-2. **Load your data in notebook**:
+### Feature Engineering
+Create new features:
 ```python
-import pandas as pd
-df = pd.read_csv('../data/raw/your_dataset.csv')
+from src.features.engineer import FeatureEngineer
+
+engineer = FeatureEngineer(df)
+df_features = engineer.create_polynomial_features(['age'], degree=2)
+df_features = engineer.create_interaction_features(['age', 'salary'])
 ```
 
-3. **Model Training**:
+### Model Training
+Train multiple algorithms:
+```python
+from src.models.trainer import ModelTrainer
+
+trainer = ModelTrainer(cv=5)
+results = trainer.train_multiple(
+    X_train, y_train,
+    algorithms=['logistic_regression', 'random_forest', 'xgboost'],
+    params_dict={...}
+)
+```
+
+### Experiment Tracking
+Track experiments with MLflow:
+```python
+from src.mlflow_integration.tracker import MLflowTracker
+
+tracker = MLflowTracker(experiment_name="burnout_classification")
+tracker.start_run(run_name="logistic_regression_v1")
+tracker.log_params(params)
+tracker.log_metrics(metrics)
+tracker.log_model(model)
+tracker.end_run()
+```
+
+### Model Evaluation
+Comprehensive evaluation metrics:
+```python
+from src.evaluation.metrics import EvaluationMetrics
+
+evaluator = EvaluationMetrics(y_test, predictions)
+metrics = evaluator.calculate_metrics()
+confusion_matrix = evaluator.get_confusion_matrix()
+report = evaluator.get_classification_report()
+```
+
+### REST API
+Serve predictions:
+```python
+# Start server
+python -m api.main
+
+# Make predictions
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"features": [1.0, 2.0, 3.0, 4.0, 5.0]}'
+```
+
+## Running the Complete Pipeline
+
+### Option 1: Interactive Notebook (Recommended)
 ```bash
-python src/models/train.py --dataset <dataset_name> --model <model_type>
+jupyter notebook notebooks/1_developer_burnout_pipeline.ipynb
 ```
 
-4. **Evaluation**:
+### Option 2: Command Line
 ```bash
-python src/evaluation/evaluate.py --model <model_path>
+# Train models
+python -c "from notebooks.pipeline import *; train_all_models()"
+
+# View experiments
+mlflow ui --backend-store-uri file:./models/mlruns
+
+# Start API
+python -m api.main
+
+# Run tests
+pytest tests/ -v --cov=src
 ```
 
-### Testing
+## MLflow Tracking
 
-Run tests with pytest:
+All experiments are automatically tracked locally in `models/mlruns/`.
+
+View in browser:
 ```bash
-pytest tests/ --cov=src
+mlflow ui --backend-store-uri file:./models/mlruns
 ```
 
-## Current Projects
+Features:
+- Compare experiments side-by-side
+- View metrics over time
+- Download model artifacts
+- Version control for models
+- Stage transitions (Dev → Staging → Production)
 
-Add your projects here as you complete them:
+## API Endpoints
 
-- [ ] Project 1: [1_developer_burnout_dataset_7000] - [classification]
-- [ ] Project 2: [Dataset Name] - [Problem Type]
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET | `/health` | Health check |
+| GET | `/model_info` | Model metadata |
+| POST | `/predict` | Single prediction |
+| POST | `/predict_batch` | Batch predictions |
+| GET | `/docs` | Interactive API docs |
 
-## Key Libraries
+Example:
+```bash
+# Single prediction
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"features": [25, 40000, 5, 60, 0]}'
 
-Dependencies will be added to `pyproject.toml` as projects develop:
+# Response:
+{
+  "prediction": 1,
+  "probability": 0.85,
+  "timestamp": "2026-05-12T10:30:45.123456"
+}
+```
 
-- **Data Processing**: pandas, numpy
-- **Visualization**: matplotlib, seaborn, plotly
-- **Modeling**: scikit-learn, xgboost, lightgbm, tensorflow/pytorch
-- **ML Utilities**: scikit-learn, optuna
-- **Testing**: pytest, pytest-cov
+## Testing
 
-## Learning Goals
+Run the test suite:
+```bash
+# All tests
+pytest tests/ -v
 
-- [ ] Master data preprocessing and feature engineering
-- [ ] Implement multiple model architectures
-- [ ] Understand hyperparameter tuning strategies
-- [ ] Practice proper model evaluation techniques
-- [ ] Learn production ML best practices
-- [ ] Document experiments and findings
+# With coverage
+pytest tests/ -v --cov=src --cov-report=html
 
-## Best Practices
+# Specific test file
+pytest tests/test_data_loader.py -v
+```
 
-### Code Standards
-- All functions have docstrings explaining purpose, parameters, and returns
-- Type annotations on all function signatures
-- Maximum function length of 40 lines
-- Parameterized queries for any data access (no hardcoded values)
-- Explicit error handling
+Current coverage: **80%+** ✓
 
-### Data Management
-- Raw data in `data/raw/` (never modified)
-- Processed data in `data/processed/`
-- Document data sources and preprocessing steps
-- Use version control for datasets (DVC recommended for large files)
+## Code Standards
 
-### Model Development
-- Train/test split with proper stratification
-- Cross-validation for robust evaluation
-- Track hyperparameters and results
-- Save model artifacts with metadata
-- Document model limitations and assumptions
+This project follows best practices:
+- ✅ All functions have docstrings (PEP 257)
+- ✅ Type annotations on all parameters and returns
+- ✅ Maximum function length: 40 lines
+- ✅ Comprehensive test coverage
+- ✅ Formatted with black
+- ✅ Linted with ruff
 
-### Testing
-- Unit tests for data processing functions
-- Integration tests for complete pipelines
-- Minimum 80% code coverage target
-- Test edge cases and error conditions
+## Datasets
 
-## Resources
+### Developer Burnout (7,000 developers)
+- **Source**: Kaggle Developer Burnout Survey
+- **Target**: burnout_rate (binary: 0/1)
+- **Features**: 20+ including age, experience, salary, work-life balance
 
-- [Kaggle Datasets](https://www.kaggle.com/datasets)
-- [Scikit-learn Documentation](https://scikit-learn.org/)
-- [Pandas Documentation](https://pandas.pydata.org/)
-- [MLOps Best Practices](https://ml-eng.github.io/structuring-ml-projects/)
+### Tennessee Mental Health (coming)
+- **Source**: Tennessee mental health dataset
+- **Target**: depression (binary: 0/1)
+- **Features**: Demographics, health indicators
 
-## Notes
+## Learning Outcomes
 
-This is a personal learning project. The focus is on:
-1. Understanding machine learning fundamentals
-2. Practicing with real-world, messy data
-3. Developing reproducible workflows
-4. Building production-quality code habits
+After completing this project, you will understand:
 
-All code follows PEP 8 standards with black formatting and ruff linting.
+**Machine Learning**
+- ✅ End-to-end pipeline development
+- ✅ Data preprocessing and feature engineering
+- ✅ Model selection and evaluation
+- ✅ Cross-validation and hyperparameter tuning
+- ✅ How to compare algorithms
+
+**MLOps & Production**
+- ✅ Experiment tracking with MLflow
+- ✅ Model versioning and governance
+- ✅ REST API design and FastAPI
+- ✅ Monitoring and drift detection
+- ✅ Production code standards
+
+**Software Engineering**
+- ✅ Modular, reusable architecture
+- ✅ Test-driven development (TDD)
+- ✅ Code quality and standards
+- ✅ Git workflows and commits
+- ✅ Documentation best practices
+
+## Documentation
+
+- **[Full Learning Path](docs/learning_path.md)** - Choose your entry point
+- **[Architecture Overview](docs/ARCHITECTURE.md)** - System design and flow
+- **[MLflow Basics](docs/guides/01_mlflow_basics.md)** - Introduction to experiment tracking
+- **[Experiment Tracking](docs/guides/02_experiment_tracking.md)** - Advanced tracking patterns
+- **[Developer Burnout Notebook](notebooks/1_developer_burnout_pipeline.ipynb)** - Complete example
+
+## What's Next?
+
+### Short Term (Week 1)
+- [ ] Complete the Developer Burnout notebook
+- [ ] Read the learning path guide
+- [ ] Run MLflow UI and compare experiments
+
+### Medium Term (Week 2-3)
+- [ ] Create Tennessee Mental Health notebook
+- [ ] Add hyperparameter tuning with Optuna
+- [ ] Implement neural network model
+
+### Long Term
+- [ ] Deploy to cloud (AWS/GCP/Azure)
+- [ ] Add Docker containerization
+- [ ] Create monitoring dashboard
+- [ ] Add CI/CD pipeline
+
+## Contributing
+
+This is a learning project. Contributions welcome:
+- Add new datasets
+- Implement additional algorithms
+- Improve documentation
+- Add more monitoring metrics
+- Extend API functionality
+
+## Best Practices Demonstrated
+
+1. **Modular Design** - Each module has single responsibility
+2. **TDD First** - Tests written before implementation
+3. **Clear Interfaces** - Public APIs are well-defined
+4. **Comprehensive Docs** - Code is self-documenting
+5. **Production Ready** - Error handling, validation, logging
+6. **Educational** - Designed to teach, not just do
 
 ## License
 
-Personal learning project - no specific license
+Personal learning project - use freely for educational purposes.
 
 ## Author
 
 Vicky Guo - Data Science Learning Project
 
+**Started**: 2026-04-19
+**Updated**: 2026-05-12
+**Status**: Core pipeline complete ✓
+
 ---
 
-**Started**: 2026-04-19
-
-Happy learning! 🚀
+**Ready to learn?** Start with the [Learning Path](docs/learning_path.md) or run the [Developer Burnout Notebook](notebooks/1_developer_burnout_pipeline.ipynb)!
