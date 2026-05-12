@@ -46,7 +46,7 @@ Or use the notebook with sample data for quick testing.
 
 ### 3. Run the Pipeline Notebook
 ```bash
-jupyter notebook notebooks/1_developer_burnout_pipeline.ipynb
+jupyter notebook src/notebooks/1_developer_burnout_pipeline.ipynb
 ```
 
 Opens a complete example of the entire ML pipeline.
@@ -69,7 +69,7 @@ Choose your starting point based on your experience level:
 
 ### 🎯 Beginner: Notebook First (1.5-2 hours)
 Start with the interactive notebook, then explore code:
-1. [Developer Burnout Pipeline Notebook](notebooks/1_developer_burnout_pipeline.ipynb)
+1. [Developer Burnout Pipeline Notebook](src/notebooks/1_developer_burnout_pipeline.ipynb)
 2. [MLflow Basics Guide](docs/guides/01_mlflow_basics.md)
 3. Explore `src/` modules
 4. Read [Architecture Overview](docs/ARCHITECTURE.md)
@@ -120,7 +120,7 @@ ds_realworld_project/
 │   │   ├── logger.py            # Prediction logging
 │   │   └── performance.py       # Drift detection
 │   └── images/                  # Project images & diagrams
-├── notebooks/                   # Educational Jupyter notebooks
+├── src/notebooks/                   # Educational Jupyter notebooks
 │   ├── 1_developer_burnout_pipeline.ipynb
 │   └── 2_teen_mental_health_complete_pipeline.ipynb
 ├── tests/                       # Unit & integration tests
@@ -151,7 +151,7 @@ from src.data.loader import DataLoader
 from src.data.preprocessor import DataPreprocessor
 from src.data.splitter import DataSplitter
 
-loader = DataLoader('sources/raw/developer_burnout.csv')
+loader = DataLoader('src/sources/raw/developer_burnout.csv')
 df = loader.load()
 
 preprocessor = DataPreprocessor(df, numeric_cols=['age', 'experience'])
@@ -224,7 +224,7 @@ curl -X POST http://localhost:8000/predict \
 
 ### Option 1: Interactive Notebook (Recommended)
 ```bash
-jupyter notebook notebooks/1_developer_burnout_pipeline.ipynb
+jupyter notebook src/notebooks/1_developer_burnout_pipeline.ipynb
 ```
 
 ### Option 2: Full Pipeline Commands
@@ -355,7 +355,7 @@ After completing this project, you will understand:
 - **[Architecture Overview](docs/ARCHITECTURE.md)** - System design and flow
 - **[MLflow Basics](docs/guides/01_mlflow_basics.md)** - Introduction to experiment tracking
 - **[Experiment Tracking](docs/guides/02_experiment_tracking.md)** - Advanced tracking patterns
-- **[Developer Burnout Notebook](notebooks/1_developer_burnout_pipeline.ipynb)** - Complete example
+- **[Developer Burnout Notebook](src/notebooks/1_developer_burnout_pipeline.ipynb)** - Complete example
 
 ## Next Steps
 
@@ -409,4 +409,4 @@ Vicky Guo - Data Science Learning Project
 
 ---
 
-**Ready to learn?** Start with the [Learning Path](docs/learning_path.md) or run the [Developer Burnout Notebook](notebooks/1_developer_burnout_pipeline.ipynb)!
+**Ready to learn?** Start with the [Learning Path](docs/learning_path.md) or run the [Developer Burnout Notebook](src/notebooks/1_developer_burnout_pipeline.ipynb)!

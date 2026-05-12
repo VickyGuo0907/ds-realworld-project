@@ -6,7 +6,7 @@ This project is designed to teach the complete ML pipeline. Choose your path:
 
 **Goal**: Understand the pipeline through example code
 
-1. **Start**: Run `notebooks/1_developer_burnout_pipeline.ipynb`
+1. **Start**: Run `src/notebooks/1_developer_burnout_pipeline.ipynb`
    - Read markdown explanations
    - Execute code cells
    - Understand the flow
@@ -43,7 +43,7 @@ This project is designed to teach the complete ML pipeline. Choose your path:
    - Read docstrings and tests
    - Time: 45 minutes
 
-3. **Run Notebook**: Execute `notebooks/1_developer_burnout_pipeline.ipynb`
+3. **Run Notebook**: Execute `src/notebooks/1_developer_burnout_pipeline.ipynb`
    - See modules in action
    - Verify your understanding
    - Time: 30 minutes

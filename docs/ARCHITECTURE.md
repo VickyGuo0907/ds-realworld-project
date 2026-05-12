@@ -54,19 +54,22 @@ ds_realworld_project/
 │   ├── monitoring/              # Monitoring
 │   │   ├── logger.py            # Prediction logging
 │   │   └── performance.py       # Drift detection
-│   └── api/                     # FastAPI service
-│       ├── main.py              # REST endpoints
-│       └── schemas.py           # Request/response models
-├── notebooks/                   # Educational notebooks
-│   └── 1_developer_burnout_pipeline.ipynb
+│   ├── api/                     # FastAPI service
+│   │   ├── main.py              # REST endpoints
+│   │   └── schemas.py           # Request/response models
+│   ├── images/                  # Project images & diagrams
+│   └── notebooks/               # Educational notebooks
+│       ├── 1_developer_burnout_pipeline.ipynb
+│       └── 2_teen_mental_health_complete_pipeline.ipynb
 ├── tests/                       # Unit & integration tests
 ├── docs/                        # Documentation
 │   ├── guides/                 # Learning guides
 │   └── ARCHITECTURE.md         # This file
-├── data/
+├── sources/
 │   ├── raw/                    # Kaggle datasets
 │   └── processed/              # Cleaned data
-├── models/mlruns/              # MLflow artifacts
+├── models/                      # Model artifacts
+│   └── mlruns/                 # MLflow artifacts
 ├── config.yaml                 # Configuration
 └── pyproject.toml              # Dependencies
 ```
