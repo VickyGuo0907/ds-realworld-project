@@ -5,7 +5,7 @@ from src.data.splitter import DataSplitter
 
 @pytest.fixture
 def sample_data():
-    """Create sample data."""
+    """Create sample sources."""
     data = {"feature1": range(100), "feature2": range(100, 200), "target": [0, 1] * 50}
     return pd.DataFrame(data)
 

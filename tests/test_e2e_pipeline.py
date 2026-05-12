@@ -1,6 +1,6 @@
 """End-to-end pipeline integration test.
 
-This test validates the complete ML pipeline from data loading through
+This test validates the complete ML pipeline from sources loading through
 evaluation and MLflow tracking.
 """
 
@@ -24,11 +24,11 @@ import mlflow
 def sample_dataset():
     """Create sample dataset for testing.
 
-    Creates synthetic data with realistic features for testing the
+    Creates synthetic sources with realistic features for testing the
     complete pipeline without external dependencies.
 
     Yields:
-        Path to temporary CSV file with test data
+        Path to temporary CSV file with test sources
     """
     np.random.seed(42)
     n_samples = 200
@@ -72,7 +72,7 @@ class TestEndToEndPipeline:
     """Test complete ML pipeline end-to-end."""
 
     def test_complete_ml_pipeline(self, sample_dataset, mlflow_experiment):
-        """Test complete ML pipeline from data to evaluation.
+        """Test complete ML pipeline from sources to evaluation.
 
         This test validates:
         1. Data loading
@@ -91,7 +91,7 @@ class TestEndToEndPipeline:
         loader = DataLoader(sample_dataset)
         df = loader.load()
 
-        assert isinstance(df, pd.DataFrame), "Loaded data should be DataFrame"
+        assert isinstance(df, pd.DataFrame), "Loaded sources should be DataFrame"
         assert len(df) == 200, "Sample dataset should have 200 rows"
         assert "burnout" in df.columns, "Target column 'burnout' should exist"
         assert "age" in df.columns, "Feature 'age' should exist"
@@ -105,7 +105,7 @@ class TestEndToEndPipeline:
         )
         df_processed = preprocessor.fit_transform()
 
-        assert df_processed.shape[0] == 200, "Processed data should have 200 rows"
+        assert df_processed.shape[0] == 200, "Processed sources should have 200 rows"
         assert (
             df_processed.isnull().sum().sum() == 0
         ), "No null values after preprocessing"
@@ -127,7 +127,7 @@ class TestEndToEndPipeline:
         splitter = DataSplitter(df_features, target_col="burnout", test_size=0.2)
         train, test = splitter.train_test_split(stratify=True)
 
-        assert len(train) + len(test) == 200, "Split data should sum to original size"
+        assert len(train) + len(test) == 200, "Split sources should sum to original size"
         assert len(test) == 40, "Test set should be 20% of 200 rows"
         assert len(train) == 160, "Train set should be 80% of 200 rows"
 
@@ -214,7 +214,7 @@ class TestEndToEndPipeline:
         print(f"  Features created: {initial_feature_count}")
 
     def test_data_loading_and_validation(self, sample_dataset):
-        """Test data loading with validation.
+        """Test sources loading with validation.
 
         Args:
             sample_dataset: Path to sample dataset fixture
@@ -305,7 +305,7 @@ class TestEndToEndPipeline:
         print("\n✅ Feature Engineering Comprehensive Test PASSED")
 
     def test_data_splitting_stratification(self, sample_dataset):
-        """Test data splitting with stratification.
+        """Test sources splitting with stratification.
 
         Args:
             sample_dataset: Path to sample dataset fixture
@@ -463,7 +463,7 @@ class TestPipelineIntegration:
     """Integration tests for pipeline components."""
 
     def test_preprocessor_normalize_and_encode(self, sample_dataset):
-        """Test that preprocessing preserves data integrity.
+        """Test that preprocessing preserves sources integrity.
 
         Args:
             sample_dataset: Path to sample dataset fixture
@@ -481,7 +481,7 @@ class TestPipelineIntegration:
         # Check row count preserved
         assert len(df_processed) == original_rows, "Row count should be preserved"
 
-        # Check no data loss
+        # Check no sources loss
         assert df_processed.shape[1] >= len(numeric_cols) + len(
             categorical_cols
         ), "All columns should be preserved"

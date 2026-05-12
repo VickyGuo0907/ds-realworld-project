@@ -265,7 +265,7 @@ for i, (pred, prob) in enumerate(zip(result['predictions'], result['probabilitie
 **Response**:
 ```json
 {
-  "detail": "Error: invalid data format"
+  "detail": "Error: invalid sources format"
 }
 ```
 

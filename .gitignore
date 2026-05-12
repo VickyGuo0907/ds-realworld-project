@@ -40,10 +40,10 @@ ENV/
 !notebooks/*.ipynb
 
 # Data
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+sources/raw/*
+sources/processed/*
+!sources/raw/.gitkeep
+!sources/processed/.gitkeep
 
 # Models
 models/*

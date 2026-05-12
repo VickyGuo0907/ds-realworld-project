@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 
 
-def download_kaggle_dataset(dataset_id: str, output_dir: str = "data/raw") -> None:
+def download_kaggle_dataset(dataset_id: str, output_dir: str = "sources/raw") -> None:
     """Download dataset from Kaggle using API.
 
     Args:
@@ -37,7 +37,7 @@ def download_kaggle_dataset(dataset_id: str, output_dir: str = "data/raw") -> No
 
 
 def download_kaggle_notebook_dataset(
-    notebook_path: str, output_dir: str = "data/raw"
+    notebook_path: str, output_dir: str = "sources/raw"
 ) -> None:
     """Download dataset associated with a Kaggle notebook.
 

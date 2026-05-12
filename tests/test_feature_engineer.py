@@ -5,7 +5,7 @@ from src.features.engineer import FeatureEngineer
 
 @pytest.fixture
 def sample_data():
-    """Create sample data for testing."""
+    """Create sample sources for testing."""
     data = {
         "age": [20, 25, 30, 35, 40],
         "income": [30000, 40000, 50000, 60000, 70000],

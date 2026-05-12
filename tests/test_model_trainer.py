@@ -7,7 +7,7 @@ from src.models.trainer import ModelTrainer
 
 @pytest.fixture
 def sample_data():
-    """Create sample data."""
+    """Create sample sources."""
     np.random.seed(42)
     X = np.random.rand(100, 5)
     y = np.random.randint(0, 2, 100)

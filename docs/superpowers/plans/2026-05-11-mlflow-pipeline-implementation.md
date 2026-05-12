@@ -32,12 +32,12 @@ mlflow:
 
 data:
   developer_burnout:
-    path: "data/raw/developer_burnout.csv"
+    path: "sources/raw/developer_burnout.csv"
     target: "burnout_rate"
     test_size: 0.2
     random_state: 42
   tennessee_mental_health:
-    path: "data/raw/tennessee_mental_health.csv"
+    path: "sources/raw/tennessee_mental_health.csv"
     target: "depression"
     test_size: 0.2
     random_state: 42
@@ -192,7 +192,7 @@ def test_load_with_validation(test_csv_file):
     loader = DataLoader(test_csv_file)
     df = loader.load()
     
-    assert df.isnull().sum().sum() == 0, "No null values expected in test data"
+    assert df.isnull().sum().sum() == 0, "No null values expected in test sources"
     assert df.shape[0] > 0, "DataFrame should not be empty"
 
 def test_load_nonexistent_file():
@@ -214,7 +214,7 @@ Expected: FAIL - DataLoader class not found
 - [ ] **Step 3: Write DataLoader implementation**
 
 ```python
-# src/data/loader.py
+# src/sources/loader.py
 """Data loading utilities."""
 
 from pathlib import Path
@@ -244,7 +244,7 @@ class DataLoader:
         Load CSV file into DataFrame.
         
         Returns:
-            DataFrame with data
+            DataFrame with sources
             
         Raises:
             ValueError: If file is empty or invalid format
@@ -287,7 +287,7 @@ Expected: PASS - All tests pass
 - [ ] **Step 5: Commit data loader**
 
 ```bash
-git add src/data/loader.py tests/test_data_loader.py
+git add src/sources/loader.py tests/test_data_loader.py
 git commit -m "feat: add data loader with CSV support"
 ```
 
@@ -310,7 +310,7 @@ from src.data.preprocessor import DataPreprocessor
 
 @pytest.fixture
 def sample_data():
-    """Create sample data with issues"""
+    """Create sample sources with issues"""
     data = {
         'numeric1': [1.0, 2.0, np.nan, 4.0, 5.0],
         'numeric2': [10, 20, 30, 40, 50],
@@ -355,7 +355,7 @@ Expected: FAIL - DataPreprocessor class not found
 - [ ] **Step 3: Write DataPreprocessor implementation**
 
 ```python
-# src/data/preprocessor.py
+# src/sources/preprocessor.py
 """Data preprocessing utilities."""
 
 import pandas as pd
@@ -365,7 +365,7 @@ from typing import List, Optional
 
 
 class DataPreprocessor:
-    """Preprocess data for modeling."""
+    """Preprocess sources for modeling."""
     
     def __init__(
         self, 
@@ -466,7 +466,7 @@ Expected: PASS - All tests pass
 - [ ] **Step 5: Commit preprocessor**
 
 ```bash
-git add src/data/preprocessor.py tests/test_data_preprocessor.py
+git add src/sources/preprocessor.py tests/test_data_preprocessor.py
 git commit -m "feat: add data preprocessor with encoding and normalization"
 ```
 
@@ -488,7 +488,7 @@ from src.data.splitter import DataSplitter
 
 @pytest.fixture
 def sample_data():
-    """Create sample data"""
+    """Create sample sources"""
     data = {
         'feature1': range(100),
         'feature2': range(100, 200),
@@ -538,7 +538,7 @@ Expected: FAIL - DataSplitter class not found
 - [ ] **Step 3: Write DataSplitter implementation**
 
 ```python
-# src/data/splitter.py
+# src/sources/splitter.py
 """Data splitting utilities."""
 
 import pandas as pd
@@ -547,7 +547,7 @@ from typing import Tuple, Optional
 
 
 class DataSplitter:
-    """Split data into train/test/validation sets."""
+    """Split sources into train/test/validation sets."""
     
     def __init__(
         self,
@@ -652,7 +652,7 @@ Expected: PASS - All tests pass
 - [ ] **Step 5: Commit splitter**
 
 ```bash
-git add src/data/splitter.py tests/test_data_splitter.py
+git add src/sources/splitter.py tests/test_data_splitter.py
 git commit -m "feat: add data splitter with stratified splitting"
 ```
 
@@ -677,7 +677,7 @@ from src.features.engineer import FeatureEngineer
 
 @pytest.fixture
 def sample_data():
-    """Create sample data"""
+    """Create sample sources"""
     data = {
         'age': [20, 25, 30, 35, 40],
         'income': [30000, 40000, 50000, 60000, 70000],
@@ -1228,7 +1228,7 @@ from src.models.base import BaseModel
 
 @pytest.fixture
 def sample_data():
-    """Create sample training data"""
+    """Create sample training sources"""
     X = np.random.rand(100, 5)
     y = np.random.randint(0, 2, 100)
     return X, y
@@ -1410,7 +1410,7 @@ from src.models.base import BaseModel
 
 @pytest.fixture
 def sample_data():
-    """Create sample data"""
+    """Create sample sources"""
     X = np.random.rand(100, 5)
     y = np.random.randint(0, 2, 100)
     return X, y
@@ -2100,7 +2100,7 @@ from typing import Dict, Optional
 
 
 class PerformanceTracker:
-    """Track performance and detect data/prediction drift."""
+    """Track performance and detect sources/prediction drift."""
     
     def __init__(self) -> None:
         """Initialize performance tracker."""
@@ -2113,7 +2113,7 @@ class PerformanceTracker:
         threshold: float = 0.1
     ) -> Dict[str, float]:
         """
-        Calculate data drift between baseline and current data.
+        Calculate sources drift between baseline and current sources.
         
         Args:
             baseline: Baseline feature distribution
@@ -2140,7 +2140,7 @@ class PerformanceTracker:
         Set baseline for drift detection.
         
         Args:
-            data: Baseline data
+            data: Baseline sources
         """
         self.baseline_stats = {
             'mean': data.mean(),
@@ -2198,8 +2198,8 @@ from src.data.loader import DataLoader
 from src.data.preprocessor import DataPreprocessor
 from src.data.splitter import DataSplitter
 
-# Load data
-loader = DataLoader('data/raw/developer_burnout.csv')
+# Load sources
+loader = DataLoader('sources/raw/developer_burnout.csv')
 df, info = loader.load_with_info()
 
 print(f"Dataset shape: {info['shape']}")
@@ -2271,7 +2271,7 @@ preprocessor = DataPreprocessor(
     categorical_cols=categorical_cols
 )
 df_processed = preprocessor.fit_transform()
-print("\nProcessed data shape:", df_processed.shape)
+print("\nProcessed sources shape:", df_processed.shape)
 ```
 
 Continue with remaining sections...
@@ -2291,7 +2291,7 @@ from src.models.trainer import ModelTrainer
 from src.data.splitter import DataSplitter
 from src.mlflow_integration.tracker import MLflowTracker
 
-# Split data
+# Split sources
 splitter = DataSplitter(df_processed, target_col='target', test_size=0.2)
 train, test = splitter.train_test_split(stratify=True)
 
@@ -2470,8 +2470,8 @@ pip install -e ".[dev]"
 
 ### 2. Load Datasets
 ```bash
-# Download from Kaggle and place in data/raw/
-ls data/raw/  # Should contain developer_burnout.csv, tennessee_mental_health.csv
+# Download from Kaggle and place in sources/raw/
+ls sources/raw/  # Should contain developer_burnout.csv, tennessee_mental_health.csv
 ```
 
 ### 3. Run Notebooks
@@ -2593,7 +2593,7 @@ from src.mlflow_integration.tracker import MLflowTracker
 
 def test_complete_pipeline():
     """Test complete ML pipeline end-to-end."""
-    # Create sample data
+    # Create sample sources
     data = {
         'feature1': np.random.rand(100),
         'feature2': np.random.rand(100),
@@ -2606,7 +2606,7 @@ def test_complete_pipeline():
     df.to_csv('test_data.csv', index=False)
     
     try:
-        # 1. Load data
+        # 1. Load sources
         loader = DataLoader('test_data.csv')
         df_loaded = loader.load()
         assert len(df_loaded) == 100
@@ -2624,7 +2624,7 @@ def test_complete_pipeline():
         df_features = engineer.create_polynomial_features(['feature1'], degree=2)
         assert 'feature1_2' in df_features.columns
         
-        # 4. Split data
+        # 4. Split sources
         splitter = DataSplitter(df_features, target_col='target')
         train, test = splitter.train_test_split()
         

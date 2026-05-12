@@ -6,7 +6,7 @@ from typing import Tuple
 
 
 class DataSplitter:
-    """Split data into train/test/validation sets."""
+    """Split sources into train/test/validation sets."""
 
     def __init__(
         self,

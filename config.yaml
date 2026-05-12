@@ -6,12 +6,12 @@ mlflow:
 
 data:
   developer_burnout:
-    path: "data/raw/developer_burnout.csv"
+    path: "sources/raw/developer_burnout.csv"
     target: "burnout_rate"
     test_size: 0.2
     random_state: 42
   tennessee_mental_health:
-    path: "data/raw/tennessee_mental_health.csv"
+    path: "sources/raw/tennessee_mental_health.csv"
     target: "depression"
     test_size: 0.2
     random_state: 42

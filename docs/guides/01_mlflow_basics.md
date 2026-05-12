@@ -89,7 +89,7 @@ You can:
 ## Common Workflow
 
 ```python
-# 1. Prepare data
+# 1. Prepare sources
 train_data, test_data = split_data(df)
 
 # 2. Start tracking

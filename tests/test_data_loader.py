@@ -1,4 +1,4 @@
-"""Tests for data loader module."""
+"""Tests for sources loader module."""
 
 import pytest
 import pandas as pd
@@ -34,7 +34,7 @@ def test_load_with_validation(test_csv_file):
     loader = DataLoader(test_csv_file)
     df = loader.load()
 
-    assert df.isnull().sum().sum() == 0, "No null values expected in test data"
+    assert df.isnull().sum().sum() == 0, "No null values expected in test sources"
     assert df.shape[0] > 0, "DataFrame should not be empty"
 
 

@@ -5,7 +5,7 @@ from typing import Dict
 
 
 class PerformanceTracker:
-    """Track performance and detect data/prediction drift."""
+    """Track performance and detect sources/prediction drift."""
 
     def __init__(self) -> None:
         """Initialize performance tracker."""
@@ -15,7 +15,7 @@ class PerformanceTracker:
         self, baseline: pd.DataFrame, current: pd.DataFrame, threshold: float = 0.1
     ) -> Dict[str, float]:
         """
-        Calculate data drift between baseline and current data.
+        Calculate sources drift between baseline and current sources.
 
         Args:
             baseline: Baseline feature distribution
@@ -46,6 +46,6 @@ class PerformanceTracker:
         Set baseline for drift detection.
 
         Args:
-            data: Baseline data
+            data: Baseline sources
         """
         self.baseline_stats = {"mean": data.mean(), "std": data.std()}

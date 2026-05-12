@@ -6,7 +6,7 @@ from typing import List, Optional
 
 
 class DataPreprocessor:
-    """Preprocess data for modeling."""
+    """Preprocess sources for modeling."""
 
     def __init__(
         self,

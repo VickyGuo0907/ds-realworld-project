@@ -6,7 +6,7 @@ from src.data.preprocessor import DataPreprocessor
 
 @pytest.fixture
 def sample_data():
-    """Create sample data with issues."""
+    """Create sample sources with issues."""
     data = {
         "numeric1": [1.0, 2.0, np.nan, 4.0, 5.0],
         "numeric2": [10, 20, 30, 40, 50],

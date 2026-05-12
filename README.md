@@ -40,7 +40,7 @@ pip install -e ".[dev]"
 
 ### 2. Download Datasets
 - Developer Burnout: [Kaggle Dataset](https://www.kaggle.com/datasets/rohitgajawada/developer-burnout)
-- Place in `data/raw/developer_burnout.csv`
+- Place in `sources/raw/developer_burnout.csv`
 
 Or use the notebook with sample data for quick testing.
 
@@ -98,7 +98,10 @@ Learn from tests and implementation:
 
 ```
 ds_realworld_project/
-├── src/                          # Production ML library
+├── src/                          # Production ML library + assets
+│   ├── api/                     # FastAPI REST service
+│   │   ├── main.py              # API endpoints
+│   │   └── schemas.py           # Request/response models
 │   ├── data/                    # Data loading & preprocessing
 │   │   ├── loader.py            # CSV loading with validation
 │   │   ├── preprocessor.py      # Data cleaning & normalization
@@ -116,24 +119,23 @@ ds_realworld_project/
 │   ├── monitoring/              # Production monitoring
 │   │   ├── logger.py            # Prediction logging
 │   │   └── performance.py       # Drift detection
-│   └── serving/                 # Model serving utilities
-├── api/                         # FastAPI REST service
-│   ├── main.py                 # API endpoints
-│   └── schemas.py              # Request/response models
+│   └── images/                  # Project images & diagrams
 ├── notebooks/                   # Educational Jupyter notebooks
 │   ├── 1_developer_burnout_pipeline.ipynb
-│   └── (2_tennessee_mental_health_* coming soon)
+│   └── 2_teen_mental_health_complete_pipeline.ipynb
 ├── tests/                       # Unit & integration tests
 ├── docs/                        # Documentation & guides
 │   ├── guides/                 # Learning guides
 │   │   ├── 01_mlflow_basics.md
 │   │   └── 02_experiment_tracking.md
 │   ├── ARCHITECTURE.md         # System architecture
+│   ├── API_DOCUMENTATION.md    # REST API docs
 │   └── learning_path.md        # Learning path guide
-├── data/
+├── sources/                     # Data folder
 │   ├── raw/                    # Original Kaggle datasets
 │   └── processed/              # Preprocessed data
-├── models/mlruns/              # MLflow tracking data
+├── models/                      # Model artifacts
+│   └── mlruns/                 # MLflow tracking data
 ├── config.yaml                 # Configuration settings
 ├── pyproject.toml              # Dependencies & metadata
 └── README.md                   # This file
@@ -143,12 +145,13 @@ ds_realworld_project/
 
 ### Data Pipeline
 Load, preprocess, and split data:
+
 ```python
 from src.data.loader import DataLoader
 from src.data.preprocessor import DataPreprocessor
 from src.data.splitter import DataSplitter
 
-loader = DataLoader('data/raw/developer_burnout.csv')
+loader = DataLoader('sources/raw/developer_burnout.csv')
 df = loader.load()
 
 preprocessor = DataPreprocessor(df, numeric_cols=['age', 'experience'])

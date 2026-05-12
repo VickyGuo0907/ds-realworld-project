@@ -22,7 +22,7 @@ class DataLoader:
         Load CSV file into DataFrame.
 
         Returns:
-            DataFrame with data
+            DataFrame with sources
 
         Raises:
             FileNotFoundError: If file does not exist
